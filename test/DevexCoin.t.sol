@@ -9,9 +9,12 @@ contract TestDevexCoin is Test {
     DevexCoin c;
 
     function setUp() public {
-        c = new DevexCoin(0);
+        c = new DevexCoin();
     }
     function testSimple() public {
-        assertEq(uint(2), uint(2), "ok");
+        c.mint(address(this), 100);
+        assertEq(c.balanceOf(address(this)), 100);
+        c.mint(0x075c299cf3b9FCF7C9fD5272cd2ed21A4688bEeD, 100);
+        assertEq(c.balanceOf(0x075c299cf3b9FCF7C9fD5272cd2ed21A4688bEeD), 100);
     }
 }
