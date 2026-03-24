@@ -11,10 +11,17 @@ contract TestDevexCoin is Test {
     function setUp() public {
         c = new DevexCoin();
     }
-    function testSimple() public {
+    function test_Mint() public {
         c.mint(address(this), 100);
         assertEq(c.balanceOf(address(this)), 100);
         c.mint(0x075c299cf3b9FCF7C9fD5272cd2ed21A4688bEeD, 100);
         assertEq(c.balanceOf(0x075c299cf3b9FCF7C9fD5272cd2ed21A4688bEeD), 100);
+    }
+
+    function test_Transfer() public {
+        c.mint(address(this), 100);
+        c.transfer(0x075c299cf3b9FCF7C9fD5272cd2ed21A4688bEeD, 100);
+        assertEq(c.balanceOf(0x075c299cf3b9FCF7C9fD5272cd2ed21A4688bEeD), 100);
+        assertEq(c.balanceOf(address(this)), 0);
     }
 }
